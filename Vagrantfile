@@ -17,6 +17,8 @@
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
 
+time_zone = "Europe/Zurich"
+
   Vagrant.configure("2") do |config|
   config.vm.box = "generic/ubuntu1804"
 
@@ -73,10 +75,29 @@
 
 ### Custom Code ###
 
-#Installation von allen Softwares
+#Installation of all softwares
+config.vm.provision "shell" do |s| 
+    s.args = [time_zone] 
+    s.inline = <<-SHELL 
+
+# set timezone
+TIME_ZONE=$1
+# Variable für die Installation setzen
+export DEBIAN_FRONTEND=noninteractive 
+# Zeitzone updaten
+timedatectl set-timezone "$TIME_ZONE"
+# Update all packages
+apt-get update -q
+# install vim and git to write into the /var/www-Folder
+apt-get install -q -y vim git
+# install Apache, PHP and MySQL
+apt-get install -q -y apache2
+apt-get install -q -y php7.2 libapache2-mod-php7.2
+apt-get install -q -y php7.2-curl php7.2-gd php7.2-mbstring php7.2-mysql php7.2-xml php7.2-zip php7.2-bz2 php7.2-intl
+apt-get install -q -y mariadb-server mariadb-client
+a2enmod rewrite headers
+systemctl restart apache2
+
 
 #Konfiguration der Services
 
-
-SHELL
-end
