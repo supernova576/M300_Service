@@ -5,37 +5,37 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure("2") do |config|
+
+
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "ubuntu/xenial64"
-
-  # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  Vagrant.configure("2") do |config|
+  config.vm.box = "generic/ubuntu1804"
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine and only allow access
-  # via 127.0.0.1 to disable public access
-config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
-### Netzwerk-Konfiguration ###
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.ssh.forward_agent = true
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox", 
 
+#freigegebener Folder für die Website
+    owner: "www-data", group: "www-data" 
+#Gruppe und owner für die Folder festlegen (Sicherheit)
 
-Vagrant::Config.run do |config|
-  config.vm.network :bridged
-end
-
+  config.vm.provider "virtualbox" do |vb| 
+#Virtualbox Config
+    vb.name = "vagrant_ubuntuModul300"
+    vb.memory = 1024
+    vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000]
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"] 
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]  
+  end
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -73,17 +73,9 @@ end
 
 ### Custom Code ###
 
-config.vm.provision "shell", inline: <<-SHELL
+#Installation von allen Softwares
 
-# Get Update and Upgrade
-apt-get update; apt-get upgrade -y
-
-# Install Apache
-apt-get install -y apache2
-
-# Make test index.html
-echo "<h1> Hirsch </h1>" > /var/www/html/index.html
-
+#Konfiguration der Services
 
 
 SHELL
