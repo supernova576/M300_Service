@@ -1,17 +1,17 @@
 # Dokumentation Yanis Kläy
-![image](https://github.com/supernova576/blah/blah?raw=true)
+![image](https://github.com/supernova576/Modul-300/blob/main/Pictures/Intro.png?raw=true)
 
 
-# Inhaltsverzeichnis
+# Inahltsverzeichnis
  1. [Auftragsdefinition](#Auftragsdefinition)
  
- 2. [Einführung](#Einführung) 
- 
- 3. [Vagrant Code](#Vagrant)
+ 1. [Einführung](#Einführung) 
 
- 4. [Testing](#Testing)
+ 2. [Vagrant Code](#Vagrant)
 
- 5. [Quellenagaben](#Quellen)
+ 3. [Testing](#Testing)
+
+ 4. [Quellenagaben](#Quellen)
 
 <div id='Auftragsdefinition'/>
 
@@ -35,7 +35,7 @@ Die Projektidee entstand im Plenum. Da viele einen Webserver mit einer Datenbank
 
 Um das Ganze besser verstehen zu können, hilft diese Grafik:
 
-![image](https://github.com/supernova576/blah/blah?raw=true)
+![image](https://github.com/supernova576/Modul-300/blob/main/Pictures/Netzwerkplan_Modul300.png?raw=true)
 
 Auf dem Hostsystem können wir http://localhost:8080 eingeben. Anschliessend leitet dieser die Anfrage an die VM auf Port 80 weiter. Wir sollten in der Lage sein, die Services so nutzen zu können.
 
@@ -45,7 +45,8 @@ Auf dem Hostsystem können wir http://localhost:8080 eingeben. Anschliessend lei
 
 # Vagrant Code
 
-Kommt noch...
+Um besser zu verstehen, welcher Teil was macht, analysieren wir hier den Code:
+
 
 <div id='Testing'/>
 
@@ -55,6 +56,11 @@ Kommt noch...
 
 <div id='Quellen'/>
 
-# Quellenangabe
+# Quellenangaben
 
-Kommt noch...
+Beschreibung                       Quelle
+
+Intro.png:                         Selbst gemacht
+Netzwerkplan_Modul300.png:         Selbst gemacht 
+
+Einzelne Teile des Codes:          https://gist.github.com/aurmil/   e346aec64c3f6b6ea17259f41e3b6ab0 
