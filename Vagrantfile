@@ -150,3 +150,16 @@ if [ ! -f "$file" ]; then
   wget -nv https://raw.githubusercontent.com/vrana/adminer/master/designs/pepa-linha/adminer.css
 fi
 
+#Login für GUI erstellen 
+sudo mysql <<-EOF
+
+  create user 'yanis'@'localhost' identified by 'Yanis12345!';
+  Grant all privileges on *.* to 'yanis'@'localhost';
+  Flush privileges;
+
+EOF
+
+
+SHELL
+  end
+end
