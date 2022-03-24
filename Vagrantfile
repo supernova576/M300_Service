@@ -98,6 +98,33 @@ apt-get install -q -y mariadb-server mariadb-client
 a2enmod rewrite headers
 systemctl restart apache2
 
+# set Vagrant folder as Apache root folder and go to it
+dir='/vagrant/www'
+if [ ! -d "$dir" ]; then
+  mkdir "$dir"
+fi
+if [ ! -L /var/www/html ]; then
+  rm -rf /var/www/html
+  ln -fs "$dir" /var/www/html
+fi
+cd "$dir"
+# Vhosts konfigurieren
+file='/etc/apache2/sites-available/dev.conf'
+if [ ! -f "$file" ]; then
+  SITE_CONF=$(cat <<EOF
+<Directory /var/www/html>
+  AllowOverride All
+  Options +Indexes -MultiViews +FollowSymLinks
+  AddDefaultCharset utf-8
+  SetEnv ENVIRONMENT "development"
+  php_flag display_errors On
+  EnableSendfile Off
+</Directory>
+EOF
+)
+  echo "$SITE_CONF" > "$file"
+fi
+a2ensite dev
+systemctl reload apache2
 
-#Konfiguration der Services
 
