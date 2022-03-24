@@ -82,11 +82,11 @@ config.vm.provision "shell" do |s|
 TIME_ZONE=$1
 #Variable für die Installation setzen
 export DEBIAN_FRONTEND=noninteractive 
-# Zeitzone updaten
+#Zeitzone updaten
 timedatectl set-timezone "$TIME_ZONE"
 #Update all packages
 apt-get update -q
-# install vim and git to write into the /var/www-Folder
+#install vim and git to write into the /var/www-Folder
 apt-get install -q -y vim git
 #install Apache, PHP and MySQL
 apt-get install -q -y apache2
