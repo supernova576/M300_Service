@@ -127,4 +127,26 @@ fi
 a2ensite dev
 systemctl reload apache2
 
+# Composer
+EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+ACTUAL_SIGNATURE="$(php -r "echo hash_file('SHA384', 'composer-setup.php');")"
+php composer-setup.php --quiet
+rm composer-setup.php
+mv composer.phar /usr/local/bin/composer
+chmod +x /usr/local/bin/composer
+sudo -H -u vagrant bash -c 'composer global require hirak/prestissimo'
+
+
+# OPcache gui script
+file='opcache.php'
+if [ ! -f "$file" ]; then
+  wget -nv -O "$file" https://raw.githubusercontent.com/amnuts/opcache-gui/master/index.php
+fi
+# Adminer script
+file='adminer.php'
+if [ ! -f "$file" ]; then
+  wget -nv -O "$file" http://www.adminer.org/latest.php
+  wget -nv https://raw.githubusercontent.com/vrana/adminer/master/designs/pepa-linha/adminer.css
+fi
 
