@@ -78,17 +78,17 @@ config.vm.provision "shell" do |s|
     s.args = [time_zone] 
     s.inline = <<-SHELL 
 
-# set timezone
+#set timezone
 TIME_ZONE=$1
-# Variable für die Installation setzen
+#Variable für die Installation setzen
 export DEBIAN_FRONTEND=noninteractive 
 # Zeitzone updaten
 timedatectl set-timezone "$TIME_ZONE"
-# Update all packages
+#Update all packages
 apt-get update -q
 # install vim and git to write into the /var/www-Folder
 apt-get install -q -y vim git
-# install Apache, PHP and MySQL
+#install Apache, PHP and MySQL
 apt-get install -q -y apache2
 apt-get install -q -y php7.2 libapache2-mod-php7.2
 apt-get install -q -y php7.2-curl php7.2-gd php7.2-mbstring php7.2-mysql php7.2-xml php7.2-zip php7.2-bz2 php7.2-intl
@@ -98,7 +98,7 @@ systemctl restart apache2
 
 **Nun werden die Installationsparameter für die Frontend-Services definiert**
 
-# set Vagrant folder as Apache root folder and go to it
+#set Vagrant folder as Apache root folder and go to it
 dir='/vagrant/www'
 if [ ! -d "$dir" ]; then
   mkdir "$dir"
@@ -108,7 +108,7 @@ if [ ! -L /var/www/html ]; then
   ln -fs "$dir" /var/www/html
 fi
 cd "$dir"
-# Vhosts konfigurieren
+#V-Hosts konfigurieren
 file='/etc/apache2/sites-available/dev.conf'
 if [ ! -f "$file" ]; then
   SITE_CONF=$(cat <<EOF
@@ -129,7 +129,7 @@ systemctl reload apache2
 
 **Am Schluss werden die Front-End Services installiert.**
 
-# Composer
+#Composer
 EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 ACTUAL_SIGNATURE="$(php -r "echo hash_file('SHA384', 'composer-setup.php');")"
@@ -140,12 +140,12 @@ chmod +x /usr/local/bin/composer
 sudo -H -u vagrant bash -c 'composer global require hirak/prestissimo'
 
 
-# OPcache gui script
+#OPcache gui script
 file='opcache.php'
 if [ ! -f "$file" ]; then
   wget -nv -O "$file" https://raw.githubusercontent.com/amnuts/opcache-gui/master/index.php
 fi
-# Adminer script
+#Adminer script
 file='adminer.php'
 if [ ! -f "$file" ]; then
   wget -nv -O "$file" http://www.adminer.org/latest.php
