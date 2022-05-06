@@ -16,7 +16,9 @@
 
 # Projektbeschreibung
 
---- kommt bald ---
+Ziel dieses Projekts ist es, mittels Docker-Compose eine funktionierende Umgebung zu erstellen. Alle nötigen Images sind im docker-compose.yaml-File enthalten und werden beim Ausführen des Commands automatisch geladen.
+
+In diesem Projekt wird mittels docker-compose eine funktionierende Datenbank im Backend und Jenkins im Frontend verwendet.
 
 <div id='yamlhehe'/>
 
