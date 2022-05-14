@@ -1,17 +1,20 @@
 # Dokumentation Yanis Kläy
 ![image](https://github.com/supernova576/Modul-300/blob/main/Pictures/Intro.png?raw=true)
-
-
+<br>
+<br>
 # Inahltsverzeichnis
 
  1. [Projektbeschreibung](#Beschreibung) 
 
- 2. [docker-compose.yaml](#yamlhehe)
+ 2. [Netzwerkplan und Sicherheitskonzept](#sicherheit)
 
- 3. [Testing](#Testing)
+ 3. [docker-compose.yaml](#yamlhehe)
 
- 4. [Quellenagaben](#Quellen)
+ 4. [Testing](#Testing)
 
+ 5. [Quellenagaben](#Quellen)
+<br>
+<br>
 <div id='Beschreibung'/>
 
 # Projektbeschreibung
@@ -20,6 +23,23 @@ Ziel dieses Projekts ist es, mittels Docker-Compose eine funktionierende Umgebun
 
 In diesem Projekt wird mittels docker-compose eine funktionierende Datenbank im Backend und Next-Cloud im Frontend verwendet. Der User kann dann unter localhost:80 Nextcloud einrichten.
 
+<br>
+<div id='sicherheit'/>
+
+# Netzwerkplan / Sicherheitskonzept
+
+![image](https://github.com/supernova576/Modul-300/blob/main/lb3/bilder/nw-plan.png?raw=true)
+
+Wie hier oben im Plan zu sehen ist, sind zwei Ports auf dem Container offen:
+| Port   |      Nutzen     |
+|:----------|:-------------|
+| 80 | Wird für den Zugriff auf das Nextcloud-GUI gebraucht. |
+| 5432 | PostgreSQL-Port. Ist **NICHT** von aussen her erreichbar. Nur für Kommunikation unter Containern. |
+
+Alle anderen Ports sind weder von aussen her, noch von intern her (Container untereindander) erreichbar. 
+
+
+<br>
 <div id='yamlhehe'/>
 
 # docker-compose.yaml
@@ -61,12 +81,15 @@ Hier sehen wir unseren ersten kompletten Service. Was welche Zeile macht, erklä
 | volumes:  | Volumes, die mitgegeben werden. |
 
 
+<br>
+
 <div id='Testing'/>
 
 # Testing
 
 --- kommt bald ---
 
+<br>
 <div id='Quellen'/>
 
 # Quellenangaben
@@ -75,5 +98,4 @@ Hier sehen wir unseren ersten kompletten Service. Was welche Zeile macht, erklä
 |:----------|:-------------|
 | Docker-Compose generell | https://docs.docker.com/compose/gettingstarted/ |
 | Gute Erklärung zu restart: always | https://serverfault.com/questions/884759/how-does-restart-always-policy-work-in-docker-compose |
-|  |  |
-|  |  |
+
