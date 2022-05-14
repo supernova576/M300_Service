@@ -1,13 +1,8 @@
 version: '3.2'
 services:
-  jenkins:
-    container_name: jenkins
-    restart: always
-    image: jenkins/jenkins:lts
+  nc:
+    image: nextcloud:apache
     ports:
-      - 12345:8080
+      - 80:80
     volumes:
-      - hehe:/var/jenkins_home
-
-volumes:
-  hehe:
+      - nc_data:/var/www/html
