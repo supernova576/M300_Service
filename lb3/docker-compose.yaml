@@ -2,7 +2,13 @@ version: '3.2'
 services:
   nc:
     image: nextcloud:apache
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PASSWORD=hirsch123
+      - POSTGRES_DB=hehedb
+      - POSTGRES_USER=yanis
     ports:
       - 80:80
+    restart: always
     volumes:
       - nc_data:/var/www/html
