@@ -12,3 +12,17 @@ services:
     restart: always
     volumes:
       - nc_data:/var/www/html
+  db:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_PASSWORD=hirsch123
+      - POSTGRES_DB=hehedb
+      - POSTGRES_USER=yanis
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    expose:
+      - 5432
+volumes:
+  db_data:
+  nc_data:
