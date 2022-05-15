@@ -68,8 +68,20 @@ Hier werden die Services definiert, ergo die Applikationen, die auf dem Containe
     restart: always
     volumes:
       - nc_data:/var/www/html
+
+  db:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_PASSWORD=hirsch123
+      - POSTGRES_DB=hehedb
+      - POSTGRES_USER=yanis
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    expose:
+      - 5432
 ```
-Hier sehen wir unseren ersten kompletten Service. Was welche Zeile macht, erkläre ich hier:
+Hier sehen wir unseren beiden Services. Was welche Zeile macht, erkläre ich hier:
 
 | Befehl   |      Nutzen     |
 |:----------|:-------------|
@@ -79,7 +91,7 @@ Hier sehen wir unseren ersten kompletten Service. Was welche Zeile macht, erklä
 | ports:  | Hier kann man definieren, welche Ports an den Container weitergeleitet werden. Es gilt --> **port_host:port_container**  |
 | restart: | Beim Starten vom Docker-Deamon, wird dieser Container automatisch mitgestartet. |
 | volumes:  | Volumes, die mitgegeben werden. |
-
+| expose: | Beschreibt, welcher Port für die INTERNE Kommunikation freigegeben wird. Für eine genauere Beschreibung hilft das Kapitel Netzwerkplan / Sicherheitskonzept. |
 
 <br>
 
