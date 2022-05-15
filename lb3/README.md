@@ -138,6 +138,13 @@ Nun melden wir uns mit unseren Anmelde-Daten an, die im YAML-File zuvor definier
 Nun sollten wir eingeloggt sein. Das Dashboard sollte ungefähr so aussehen:
 ![image](https://github.com/supernova576/Modul-300/blob/main/lb3/bilder/dashboard.png?raw=true)
 
+
+Falls man den Container nicht mehr braucht, kann man ihn mit folgendem Command herunterfahren:
+
+```yml
+docker-compose down
+```
+
 Viel Spass beim Benutzen von Nextcloud :)
 
 <br>
