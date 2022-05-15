@@ -99,7 +99,46 @@ Hier sehen wir unseren beiden Services. Was welche Zeile macht, erkläre ich hie
 
 # Testing
 
---- kommt bald ---
+**Wichtig**: Der Service wird unter localhost:80 verfügbar sein, falls dieser Port bereits in Benutzung ist, bitte die Zeile **ports:** im YAML-File abändern (siehe Code unten): 
+
+```yml
+nc:
+    image: nextcloud:apache
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PASSWORD=hirsch123
+      - POSTGRES_DB=hehedb
+      - POSTGRES_USER=yanis
+    ports:
+      - <Beliebiger Port>:80  <-- Hier den Port ändern
+    restart: always
+    volumes:
+      - nc_data:/var/www/html
+```
+Im Ordner, indem sich das YAML-File befindet, geben wir nun folgenden Command ein:
+
+```yml
+docker-compose up -d
+```
+Beim ersten Ausführen des Codes geht es ein wenig länger, da Docker zuerst die Images vom Dockerhub herunterladen muss. Anschliessend sollte folgendes zu sehen sein: 
+
+![image](https://github.com/supernova576/Modul-300/blob/main/lb3/bilder/docker-compose.png?raw=true)
+
+Anschliessend geben wir in einem beliebigen Browser die folgende URL ein: http://localhost:80 oder http://localhost:zuvor_festgelegter_Port
+
+Man sollte nun folgendes sehen:
+![image](https://github.com/supernova576/Modul-300/blob/main/lb3/bilder/login.png?raw=true)
+
+Nun melden wir uns mit unseren Anmelde-Daten an, die im YAML-File zuvor definiert wurden:
+
+| Username   |      Password     |
+|:----------|:-------------|
+| yanis | hirsch123 |
+
+Nun sollten wir eingeloggt sein. Das Dashboard sollte ungefähr so aussehen:
+![image](https://github.com/supernova576/Modul-300/blob/main/lb3/bilder/dashboard.png?raw=true)
+
+Viel Spass beim Benutzen von Nextcloud :)
 
 <br>
 <div id='Quellen'/>
@@ -110,4 +149,4 @@ Hier sehen wir unseren beiden Services. Was welche Zeile macht, erkläre ich hie
 |:----------|:-------------|
 | Docker-Compose generell | https://docs.docker.com/compose/gettingstarted/ |
 | Gute Erklärung zu restart: always | https://serverfault.com/questions/884759/how-does-restart-always-policy-work-in-docker-compose |
-
+| Projektidee: |https://github.com/docker/awesome-compose|
